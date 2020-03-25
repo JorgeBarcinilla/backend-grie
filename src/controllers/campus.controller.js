@@ -2,7 +2,9 @@ const Campus = require('../models/campus');
 const campusCtrl = {};
 
 campusCtrl.getCampuses = async (req, res) => {
-    const campuses = await Campus.find({idSchool: req.params.idSchool});
+    const campuses = await Campus.find({
+        idSchool: req.params.idSchool
+    });
     console.log(campuses);
     res.json(campuses);
 }
@@ -16,9 +18,15 @@ campusCtrl.getCampuses = async (req, res) => {
 //Funciona bien
 campusCtrl.createCampus = async (req, res) => {
     console.log(req);
-    const {nombre} = req.body;
+    const {
+        nombre,
+        idSchool
+    } = req.body;
 
-    const campus = new Campus({nombre});
+    const campus = new Campus({
+        nombre,
+        idSchool
+    });
     await campus.save();
 
     res.json({
@@ -28,7 +36,7 @@ campusCtrl.createCampus = async (req, res) => {
 }
 
 //funciona bien
-campusCtrl.assingnSchool =  async (req, res) => {
+/*campusCtrl.assingnSchool = async (req, res) => {
     const campus = await Campus.findById(req.params.idCampus);
     campus.idSchool = req.body.idSchool
     await campus.save();
@@ -36,22 +44,26 @@ campusCtrl.assingnSchool =  async (req, res) => {
         message: 'Sede asignada correctamente',
         data: ''
     });
-}
+}*/
 
-campusCtrl.updateCampus =  async (req, res) => {
+campusCtrl.updateCampus = async (req, res) => {
     const campus = await Campus.findById(req.params.idCampus);
-    for(let key in req.body){
+    for (let key in req.body) {
         campus[key] = req.body[key]
     }
     await campus.save();
-    res.json({status: 'Sede actualizada'});
+    res.json({
+        status: 'Sede actualizada'
+    });
 }
 
 //Funciona bien
 campusCtrl.deleteCampus = async (req, res) => {
     console.log(req.params.idCampus)
     await Campus.findByIdAndDelete(req.params.idCampus);
-    res.json({status: 'Sede eliminada'});
+    res.json({
+        status: 'Sede eliminada'
+    });
 }
 
 module.exports = campusCtrl;

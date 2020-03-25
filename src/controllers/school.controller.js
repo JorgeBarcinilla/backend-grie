@@ -8,7 +8,9 @@ schoolCtrl.getSchools = async (req, res) => {
 }
 
 schoolCtrl.getSchool = async (req, res) => {
-    const school = await School.findOne({idUser: req.user.id});
+    const school = await School.findOne({
+        idUser: req.user.id
+    });
     console.log(school);
     res.json(school);
 }
@@ -17,38 +19,70 @@ schoolCtrl.getSchool = async (req, res) => {
 schoolCtrl.createSchool = async (req, res) => {
     console.log(req.body);
     console.log(req.user);
-    const {nombre,codDane,rector,coordinador,liderPRAE,liderLogistica,liderConsejoAcademico,liderBrigada
-        ,liderPadres,liderEstudiantes,representanteOrganismosSocorro,
-        mision,vision,objetivos,valores} = req.body;
+    const {
+        nombre,
+        codDane,
+        rector,
+        coordinador,
+        liderPRAE,
+        liderLogistica,
+        liderConsejoAcademico,
+        liderBrigada,
+        liderPadres,
+        liderEstudiantes,
+        representanteOrganismosSocorro,
+        mision,
+        vision,
+        objetivos,
+        valores
+    } = req.body;
 
-    const school = new School({idUser : req.user,nombre,codDane,rector,coordinador,liderPRAE,liderLogistica,liderConsejoAcademico,liderBrigada
-        ,liderPadres,liderEstudiantes,representanteOrganismosSocorro,
-        mision,vision,objetivos,valores});
-    
+    const school = new School({
+        idUser: req.user,
+        nombre,
+        codDane,
+        rector,
+        coordinador,
+        liderPRAE,
+        liderLogistica,
+        liderConsejoAcademico,
+        liderBrigada,
+        liderPadres,
+        liderEstudiantes,
+        representanteOrganismosSocorro,
+        mision,
+        vision,
+        objetivos,
+        valores
+    });
+
     school.idUser = req.user.id
-    
+
     await school.save();
     res.json({
         message: 'Colegio guardado',
-        data: school.id
     });
 }
 
 
 
-schoolCtrl.updateSchool =  async (req, res) => {
+schoolCtrl.updateSchool = async (req, res) => {
 
-    const school = await Campus.findById(req.params.idSchool);
-    for(let key in req.body){
+    const school = await School.findById(req.params.idSchool);
+    for (let key in req.body) {
         school[key] = req.body[key]
     }
     await school.save();
-    res.json({status: 'Colegio actualizada'});
+    res.json({
+        status: 'Colegio actualizado'
+    });
 }
 
 schoolCtrl.deleteSchool = async (req, res) => {
     await School.findByIdAndDelete(req.params.idSchool);
-    res.json({status: 'Colegio eliminado'});
+    res.json({
+        status: 'Colegio eliminado'
+    });
 }
 
 /*

@@ -3,9 +3,20 @@ const router = require('express-promise-router')();
 const passport = require('passport');
 const passportConf = require('../passport');
 
-const {getCampuses,createCampus,deleteCampus,getCampus,updateCampus,assingnSchool} = require('../controllers/campus.controller');
-const passportJWT = passport.authenticate('jwt',{session: false});
-const passportSignIn = passport.authenticate('local',{session: false});
+const {
+    getCampuses,
+    createCampus,
+    deleteCampus,
+    getCampus,
+    updateCampus,
+    assingnSchool
+} = require('../controllers/campus.controller');
+const passportJWT = passport.authenticate('jwt', {
+    session: false
+});
+const passportSignIn = passport.authenticate('local', {
+    session: false
+});
 
 //Todos los posts
 router.route('/get/:idSchool')
@@ -17,11 +28,11 @@ router.route('/get')
 */
 //Crea un post
 router.route('/create')
-    .post(passportJWT,createCampus);
+    .post(passportJWT, createCampus);
 
 //Asigna un la sede a un colegio
-router.route('/assignSchool/:idCampus')
-.put(passportJWT,assingnSchool);
+/*router.route('/assignSchool/:idCampus')
+.put(passportJWT,assingnSchool);*/
 
 //Actualiza un post
 router.route('/update/:idCampus')
