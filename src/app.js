@@ -7,7 +7,7 @@ const session = require('express-session');
 
 // Setting
 app.set('port', process.env.PORT || 4000);
-  
+
 
 // Middlewares
 app.use(morgan('dev'));
@@ -28,5 +28,6 @@ app.use('/api/user', require('./routes/user.routes'));
 app.use('/api/comment', require('./routes/comment.routes'));
 app.use('/api/school', require('./routes/school.routes'));
 app.use('/api/campus', require('./routes/campus.routes'));
+app.use('/api/lineamientoPoliticaRiesgo', require('./routes/lineamientospoliticaRiesgo.routes'));
 
 module.exports = app;
