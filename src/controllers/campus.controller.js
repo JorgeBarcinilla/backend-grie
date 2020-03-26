@@ -53,7 +53,7 @@ campusCtrl.updateCampus = async (req, res) => {
     }
     await campus.save();
     res.json({
-        status: 'Sede actualizada'
+        message: 'Sede actualizada'
     });
 }
 
@@ -62,7 +62,7 @@ campusCtrl.deleteCampus = async (req, res) => {
     console.log(req.params.idCampus)
     await Campus.findByIdAndDelete(req.params.idCampus);
     res.json({
-        status: 'Sede eliminada'
+        message: 'Sede eliminada'
     });
 }
 

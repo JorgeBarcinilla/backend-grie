@@ -74,14 +74,14 @@ schoolCtrl.updateSchool = async (req, res) => {
     }
     await school.save();
     res.json({
-        status: 'Colegio actualizado'
+        message: 'Colegio actualizado'
     });
 }
 
 schoolCtrl.deleteSchool = async (req, res) => {
     await School.findByIdAndDelete(req.params.idSchool);
     res.json({
-        status: 'Colegio eliminado'
+        message: 'Colegio eliminado'
     });
 }
 

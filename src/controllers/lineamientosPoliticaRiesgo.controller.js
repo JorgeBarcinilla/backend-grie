@@ -47,7 +47,7 @@ lineamientoCtrl.updateLineamiento = async (req, res) => {
     }
     await lineamiento.save();
     res.json({
-        status: "Lineamiento de politica de riesgos actualizado"
+        message: "Lineamiento de politica de riesgos actualizado"
     });
 };
 
