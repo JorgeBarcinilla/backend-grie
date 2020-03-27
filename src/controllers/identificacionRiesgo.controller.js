@@ -4,7 +4,7 @@ const identificacionRiesgoCtrl = {};
 identificacionRiesgoCtrl.getIdentificacionRiesgo = async (req, res) => {
     const identificacionRiesgo = await IdentificacionRiesgo.find({
         idCampus: req.params.idCampus
-    });
+    }, req.params.keys == 'undefined' ? null : req.params.keys.split('-'));
     console.log(identificacionRiesgo);
     res.json(identificacionRiesgo);
 };

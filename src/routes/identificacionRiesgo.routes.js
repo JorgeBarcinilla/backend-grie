@@ -17,7 +17,7 @@ const passportSignIn = passport.authenticate('local', {
 });
 
 //Todos los posts
-router.route('/get/:idCampus')
+router.route('/get/:idCampus/:keys')
     .get(passportJWT, getIdentificacionRiesgo);
 
 router.route('/create')
