@@ -55,6 +55,23 @@ identificacionRiesgoCtrl.updateIdentificacionRiesgo = async (req, res) => {
     res.json({
         message: "Riesgo actualizado"
     });
+}
+
+
+identificacionRiesgoCtrl.guardarProbabilidad = async (req, res) => {
+    const arrRiesgos = req.body.riesgos;
+
+    arrRiesgos.forEach(async element => {
+
+        const riesgo = await IdentificacionRiesgo.findById(element.id);
+        for (let key in element) {
+            riesgo[key] = element[key];
+        }
+        await riesgo.save();
+    });
+    res.json({
+        message: "Probabilidades actualizadas"
+    });
 };
 
 module.exports = identificacionRiesgoCtrl;

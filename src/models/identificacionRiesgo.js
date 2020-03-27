@@ -37,6 +37,9 @@ const IdentificacionRiesgoSchema = new Schema({
     }],
     nivelImpacto: {
         type: String
+    },
+    probabilidad: {
+        type: String
     }
 
 });
