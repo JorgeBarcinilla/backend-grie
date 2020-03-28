@@ -30,8 +30,16 @@ userCtrl.signIn = async (req, res) => {
     //generate token
     const token = signToken(req.user);
 
+    
+
+    const school = await School.findOne({
+        idUser: req.user.id
+    });
+
+    console.log(school);
+
     res.status(200).json({
-        data: token
+        data: {token, name:school.nombre}
     });
 }
 
@@ -49,7 +57,7 @@ userCtrl.signUp = async (req, res) => {
     //Check if there is a user with the same email 
     if (foundUser) {
         return res.status(403).json({
-            message: 'El usuario ya se encuantra en uso'
+            message: 'El usuario ya se encuentra en uso'
         });
     }
 
