@@ -29,8 +29,9 @@ userCtrl.signIn = async (req, res) => {
 
     //generate token
     const token = signToken(req.user);
+
     res.status(200).json({
-        token
+        data: token
     });
 }
 
@@ -48,7 +49,7 @@ userCtrl.signUp = async (req, res) => {
     //Check if there is a user with the same email 
     if (foundUser) {
         return res.status(403).json({
-            error: 'Usuario is already  in use'
+            message: 'El usuario ya se encuantra en uso'
         });
     }
 
@@ -69,11 +70,11 @@ userCtrl.signUp = async (req, res) => {
 
 
     //generate token
-    const token = signToken(newUser);
+    //const token = signToken(newUser);
 
     //respond with token
     res.status(200).json({
-        token
+        message: 'Usuario Creado',
     });
 
 }
