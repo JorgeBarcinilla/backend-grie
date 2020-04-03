@@ -24,10 +24,20 @@ const CaracterizacionContextoSchema = new Schema({
             calificacion: String,
             icon: String
         }],
-        financieros: [{
-            nombre: String,
-            rubro: String,
-        }],
+        financieros: {
+            financiero1: {
+                rubro: String
+            },
+            financiero2: {
+                rubro: String
+            },
+            financiero3: {
+                rubro: String
+            },
+            financiero4: {
+                rubro: String
+            },
+        },
         comunidadEducativa: [{
             tipoPoblacion: String,
             cantidad: String,
