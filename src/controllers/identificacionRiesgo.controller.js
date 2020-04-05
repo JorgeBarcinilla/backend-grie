@@ -11,7 +11,7 @@ identificacionRiesgoCtrl.getIdentificacionRiesgo = async (req, res) => {
 
 //Funciona bien
 identificacionRiesgoCtrl.createIdentificacionRiesgo = async (req, res) => {
-    console.log(req);
+    console.log(req.body);
     const {
         idCampus,
         proceso,
@@ -22,7 +22,7 @@ identificacionRiesgoCtrl.createIdentificacionRiesgo = async (req, res) => {
         amenaza,
         descripcion,
         causas,
-        concecuencias,
+        consecuencias,
         nivelImpacto
     } = req.body;
 
@@ -36,7 +36,7 @@ identificacionRiesgoCtrl.createIdentificacionRiesgo = async (req, res) => {
         amenaza,
         descripcion,
         causas,
-        concecuencias,
+        consecuencias,
         nivelImpacto
     });
     await identificacionRiesgo.save();
@@ -47,13 +47,22 @@ identificacionRiesgoCtrl.createIdentificacionRiesgo = async (req, res) => {
 };
 
 identificacionRiesgoCtrl.updateIdentificacionRiesgo = async (req, res) => {
-    const IdentificacionRiesgo = await IdentificacionRiesgo.findById(req.params.idRiesgo);
+    const identificacionRiesgo = await IdentificacionRiesgo.findById(req.params.idRiesgo);
     for (let key in req.body) {
-        IdentificacionRiesgo[key] = req.body[key];
+        identificacionRiesgo[key] = req.body[key];
     }
-    await IdentificacionRiesgo.save();
+    await identificacionRiesgo.save();
     res.json({
         message: "Riesgo actualizado"
+    });
+}
+identificacionRiesgoCtrl.updateCausa = async (req, res) => {
+    const identificacionRiesgo = await IdentificacionRiesgo.findById(req.params.idRiesgo);
+    identificacionRiesgo.causas = req.body.causas
+    identificacionRiesgo.solidez = req.body.solidez
+    await identificacionRiesgo.save();
+    res.json({
+        message: "Causa actualizada"
     });
 }
 

@@ -30,9 +30,25 @@ const IdentificacionRiesgoSchema = new Schema({
         type: String
     },
     causas: [{
-        type: String
+        nombre: String,
+        control: {
+            nombre: String,
+            criterio1: {
+                a: String,
+                b: String
+            },
+            criterio2: String,
+            criterio3: String,
+            criterio4: String,
+            criterio5: String,
+            criterio6: String,
+            calificacionDisenio: String,
+            calificacionEjecucion: String,
+            solidez: String,
+            fortalecer: String
+        }
     }],
-    concecuencias: [{
+    consecuencias: [{
         type: String
     }],
     nivelImpacto: {
@@ -40,7 +56,10 @@ const IdentificacionRiesgoSchema = new Schema({
     },
     probabilidad: {
         type: String
-    }
+    },
+    solidez: {
+        type: String
+    },
 
 });
 
