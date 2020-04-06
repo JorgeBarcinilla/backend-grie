@@ -8,7 +8,9 @@ const {
     getIdentificacionRiesgo,
     updateIdentificacionRiesgo,
     guardarProbabilidad,
-    updateCausa
+    updateCausa,
+    valorarControles,
+    tratarRiesgo
 } = require('../controllers/identificacionRiesgo.controller');
 const passportJWT = passport.authenticate('jwt', {
     session: false
@@ -33,5 +35,11 @@ router.route('/updateCausa/:idRiesgo')
 
 router.route('/guardarProbabilidad')
     .put(passportJWT, guardarProbabilidad);
+
+router.route('/valorarControles/:idRiesgo')
+    .put(passportJWT, valorarControles);
+
+router.route('/tratarRiesgo/:idRiesgo')
+    .put(passportJWT, tratarRiesgo);
 
 module.exports = router;

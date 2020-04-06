@@ -45,9 +45,21 @@ const IdentificacionRiesgoSchema = new Schema({
             calificacionDisenio: String,
             calificacionEjecucion: String,
             solidez: String,
-            fortalecer: String
+            fortalecer: String,
+        },
+        accion: {
+            actividadControl: String,
+            responsable: String,
+            tiempoEjecucion: String,
+            soporte: String
         }
     }],
+    disminuirImpacto: {
+        type: String
+    },
+    disminuirProbabilidad: {
+        type: String
+    },
     consecuencias: [{
         type: String
     }],
@@ -60,7 +72,18 @@ const IdentificacionRiesgoSchema = new Schema({
     solidez: {
         type: String
     },
-
+    tratamiento: {
+        estado: String,
+        tipoCompartir: String,
+        actividadesCumplidas: String,
+        incidentes: String,
+        planContingencia: {
+            actividadControl: String,
+            responsable: String,
+            tiempoEjecucion: String,
+            soporte: String
+        }
+    }
 });
 
 module.exports = mongoose.model('IdentificacionRiesgo', IdentificacionRiesgoSchema);

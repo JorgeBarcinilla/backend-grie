@@ -1,11 +1,14 @@
 const IdentificacionRiesgo = require("../models/identificacionRiesgo");
+const removeNullValues = require("../helpers/removeNullValues")
 const identificacionRiesgoCtrl = {};
 
 identificacionRiesgoCtrl.getIdentificacionRiesgo = async (req, res) => {
     const identificacionRiesgo = await IdentificacionRiesgo.find({
         idCampus: req.params.idCampus
-    }, req.params.keys == 'undefined' ? null : req.params.keys.split('-'));
-    console.log(identificacionRiesgo);
+    }, req.params.keys == 'undefined' ? null : req.params.keys.split('-')).lean();
+    identificacionRiesgo.map(element => {
+        element = removeNullValues(element)
+    })
     res.json(identificacionRiesgo);
 };
 
@@ -63,6 +66,51 @@ identificacionRiesgoCtrl.updateCausa = async (req, res) => {
     await identificacionRiesgo.save();
     res.json({
         message: "Causa actualizada"
+    });
+}
+
+identificacionRiesgoCtrl.valorarControles = async (req, res) => {
+    const identificacionRiesgo = await IdentificacionRiesgo.findById(req.params.idRiesgo);
+    identificacionRiesgo.disminuirImpacto = req.body.disminuirImpacto
+    identificacionRiesgo.disminuirProbabilidad = req.body.disminuirProbabilidad
+    await identificacionRiesgo.save();
+    res.json({
+        message: "Controles valorados"
+    });
+}
+
+identificacionRiesgoCtrl.tratarRiesgo = async (req, res) => {
+    const identificacionRiesgo = await IdentificacionRiesgo.findById(req.params.idRiesgo);
+    const {
+        estado,
+        tipoCompartir,
+        actividadesCumplidas,
+        incidentes,
+        planContingencia,
+        acciones
+    } = req.body
+    const tratamiento = {
+        estado,
+        actividadesCumplidas,
+        incidentes,
+        planContingencia,
+        tipoCompartir
+    };
+    identificacionRiesgo.tratamiento = tratamiento
+    if (acciones) {
+        identificacionRiesgo.causas.map(element => {
+            element.accion = acciones.find(acc => {
+                return acc.idCausa == element._id
+            });
+        })
+    } else {
+        identificacionRiesgo.causas.map(element => {
+            element.accion = null
+        })
+    }
+    await identificacionRiesgo.save();
+    res.json({
+        message: "Riesgo tratado"
     });
 }
 
