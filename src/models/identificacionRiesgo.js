@@ -23,6 +23,9 @@ const IdentificacionRiesgoSchema = new Schema({
     activo: {
         type: String
     },
+    tipoActivo: {
+        type: String
+    },
     amenaza: {
         type: String
     },
@@ -32,7 +35,7 @@ const IdentificacionRiesgoSchema = new Schema({
     causas: [{
         nombre: String,
         control: {
-            nombre: String,
+            descripcion: String,
             criterio1: {
                 a: String,
                 b: String
