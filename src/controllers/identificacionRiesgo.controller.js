@@ -3,8 +3,7 @@ const removeNullValues = require('../helpers/removeNullValues')
 const identificacionRiesgoCtrl = {}
 
 identificacionRiesgoCtrl.getIdentificacionRiesgo = async (req, res) => {
-  const identificacionRiesgo = await IdentificacionRiesgo.find(
-    {
+  const identificacionRiesgo = await IdentificacionRiesgo.find({
       idCampus: req.params.idCampus,
     },
     req.params.keys == 'undefined' ? null : req.params.keys.split('-'),
@@ -64,6 +63,17 @@ identificacionRiesgoCtrl.updateIdentificacionRiesgo = async (req, res) => {
     message: 'Riesgo actualizado',
   })
 }
+
+identificacionRiesgoCtrl.deleteIdentificacionRiesgo = async (req, res) => {
+  await IdentificacionRiesgo.remove({
+    _id: req.params.idRiesgo
+  })
+  res.json({
+    message: 'Riesgo eliminado',
+  })
+}
+
+
 identificacionRiesgoCtrl.updateCausa = async (req, res) => {
   const identificacionRiesgo = await IdentificacionRiesgo.findById(
     req.params.idRiesgo,
@@ -72,7 +82,7 @@ identificacionRiesgoCtrl.updateCausa = async (req, res) => {
   identificacionRiesgo.solidez = req.body.solidez
   await identificacionRiesgo.save()
   res.json({
-    message: 'Causa actualizada',
+    message: 'Guardado',
   })
 }
 
