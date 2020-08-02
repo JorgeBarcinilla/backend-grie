@@ -32,5 +32,6 @@ app.use('/api/lineamientoPoliticaRiesgo', require('./routes/lineamientospolitica
 app.use('/api/caracterizacionContexto', require('./routes/caracterizacionContexto.routes'));
 app.use('/api/identificacionRiesgo', require('./routes/identificacionRiesgo.routes'));
 app.use('/api/preparacionRespuesta', require('./routes/preparacionRespuesta.routes'));
+app.use('/api/reporteDanio', require('./routes/reporteDanio.routes'));
 
 module.exports = app;
