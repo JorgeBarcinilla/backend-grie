@@ -34,5 +34,6 @@ app.use('/api/identificacionRiesgo', require('./routes/identificacionRiesgo.rout
 app.use('/api/preparacionRespuesta', require('./routes/preparacionRespuesta.routes'));
 app.use('/api/reporteDanio', require('./routes/reporteDanio.routes'));
 app.use('/api/valoracionSituacion', require('./routes/valoracionSituacion.routes'));
+app.use('/api/ejecucionRespuesta', require('./routes/ejecucionRecuperacion.routes'));
 
 module.exports = app;
