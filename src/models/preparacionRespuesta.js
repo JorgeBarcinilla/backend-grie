@@ -46,7 +46,7 @@ const PreparacionRespuestaSchema = new Schema({
       fechaAdquisicion: Date,
       recursos: String,
     }],
-    necesidadesPenalizacion: [{
+    necesidadesSenializacion: [{
       descripcion: String,
       senialesExistentes: String,
       senialesRequeridas: String,
